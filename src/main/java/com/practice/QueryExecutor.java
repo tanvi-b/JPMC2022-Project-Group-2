@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class QueryExecutor {
+
     public List executeQuery(CqlSession session, String keySpace, String tableName) {
         Select select = QueryBuilder.selectFrom(keySpace, tableName).all();
 
@@ -48,4 +49,5 @@ public class QueryExecutor {
         }
         return results;
     }
+
 }

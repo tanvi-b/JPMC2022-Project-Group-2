@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping
 public class CassandraTestController {
@@ -41,6 +41,14 @@ public class CassandraTestController {
     }
     public List<Map<String, Object>> GetData (String keySpace, String tableName) {
         List<Map<String, Object>> list = new QueryExecutor().executeQuery(session, keySpace,tableName);
+        return list;
+    }
+    @RequestMapping(value = "/GetTableList", method = RequestMethod.GET)
+    public List<Map<String, Object>> GetTableList () {
+        return GetTableListData("system_schema");
+    }
+    public List<Map<String, Object>> GetTableListData (String keySpace) {
+        List<Map<String, Object>> list = new QueryExecutor().executeQuery(session, keySpace, "tables");
         return list;
     }
 }
